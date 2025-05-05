@@ -117,19 +117,19 @@ DevContainer の起動に必要なハードウェア要件は下記の通りと�
 │   ├── logs
 │   ├── _parameter                                      # ITA 独自変数 __parameters_dir_for_epc__ で使用する
 │   │                                                       作業ディレクトリで、収集機能（in）の「_parameters」のパス
-│   └── _parameters_file                                # ITA 独自変数 __parameters_file_dir_for_epc__ で使用する
-│                                                            作業ディレクトリで、収集機能（in）の「_parameters」のパス
+│   ├── _parameters_file                                # ITA 独自変数 __parameters_file_dir_for_epc__ で使用する
+│   │                                                       作業ディレクトリで、収集機能（in）の「_parameters」のパス
 │   ├── playbook.yml                                    # Ansible 実行時のメインのP laybook
 │   ├── template_files                                  # テンプレートファイル格納さき
 │   ├── upload_files                                    # アップロードファイル格納先
 │   └── vault_password_file_path                        # Ansible Vault パスワードファイル(平文)
 ├── inventory.ini                                        # インベントリファイル
 ├── out                                                  # Ansible 実行時の一時領域
-│   └── conductor_workflowdir                           # ITA独自変数 __conductor_workflowdir__ のディレクトリ
+│   ├── conductor_workflowdir                           # ITA独自変数 __conductor_workflowdir__ のディレクトリ
 │   ├── MOVEMENT_STATUS_FILE                            # ITA独自変数 __movement_status_filepath__ のファイルパス
 │   ├── _parameter                                      # ITA 独自変数 __parameter_dir__ で使用する
 │   │                                                       作業結果ディレクトリで、収集機能（out）の「_parameters」のパス
-│   └── _parameters_file                                # ITA 独自変数 __parameters_file_dir__ で使用する
+│   ├── _parameters_file                                # ITA 独自変数 __parameters_file_dir__ で使用する
 │   │                                                       作業結果ディレクトリで、収集機能（out）の「_parameters」のパス
 │   └── workflowdir                                     # ITA独自変数 __workflowdir__  のディレクトリ
 └── workspace.code-workspace                             # 本ツールの VSCode ワークスペースの定義
