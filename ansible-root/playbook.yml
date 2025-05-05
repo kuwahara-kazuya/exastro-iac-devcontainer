@@ -1,0 +1,35 @@
+---
+# This playbook is used to run the child playbooks in the order they are listed.
+# It is designed to be run on localhost and uses the environment variables set in the host_vars file.
+# The child playbooks are included in the tasks section and will be executed in the order they are listed.
+# The playbook also includes a debug task to gather facts from all hosts.
+# The debug task is included in the tasks section and will be executed before the child playbooks.
+# The playbook is designed to be run with Ansible and requires the necessary variables to be set in the host_vars file.
+- name: Get hostname
+  hosts:
+    - localhost
+    - target-almalinux
+  gather_facts: true
+  # environment:
+  tasks:
+    - include_tasks: child_playbooks/movement_get-hostname.yml
+
+- name: Get Resource Group
+  hosts: localhost
+  remote_user: "{{__loginuser__}}"
+  gather_facts: true
+  # When using Exastro's global variable management,
+  # the values configured for variables are mapped to the environment variables of the Ansible role.
+  environment:
+    AZURE_SUBSCRIPTION_ID: '{{ azure_subscription_id }}'
+    AZURE_CLIENT_ID: '{{ azure_client_id }}'
+    AZURE_SECRET: '{{ azure_secret }}'
+    AZURE_TENANT: '{{ azure_tenant }}'
+    http_proxy: "{{ lookup ('env', 'http_proxy') }}"
+    https_proxy: "{{ lookup ('env', 'https_proxy') }}"
+    HTTP_PROXY: "{{ lookup ('env', 'HTTP_PROXY') }}"
+    HTTPS_PROXY: "{{ lookup ('env', 'HTTPS_PROXY') }}"
+    NO_PROXY: "{{ lookup ('env', 'NO_PROXY') }}"
+    no_proxy: "{{ lookup ('env', 'no_proxy') }}"
+  tasks:
+    - include_tasks: child_playbooks/movement_get-resource-group.yml

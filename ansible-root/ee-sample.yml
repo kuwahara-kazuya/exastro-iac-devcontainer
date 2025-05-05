@@ -1,0 +1,29 @@
+version: 3
+
+build_arg_defaults:
+  ANSIBLE_GALAXY_CLI_COLLECTION_OPTS: '--ignore-certs'
+
+images:
+  base_image:
+    name: registry.access.redhat.com/ubi9/ubi-init:latest
+
+dependencies:
+  ansible_core:
+    package_pip: ansible_core
+  ansible_runner:
+    package_pip: ansible_runner
+  python_interpreter:
+    package_system: "python39"
+    python_path: "/usr/bin/python3.9"
+
+additional_build_steps:
+  prepend_builder:
+    - RUN export HTTP_PROXY=http://proxy.example.com:8080
+    - RUN export HTTPS_PROXY=http://proxy.example.com:8080
+    - RUN export NO_PROXY=localhost,127.0.0.1
+  append_base:
+    - RUN /usr/bin/python3.9 -m pip install --upgrade pip
+
+options:
+  package_manager_path: /usr/bin/dnf
+  user: root

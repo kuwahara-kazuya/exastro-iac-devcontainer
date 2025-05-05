@@ -1,0 +1,32 @@
+FROM almalinux/9-init
+
+ARG HTTP_PROXY
+ARG HTTPS_PROXY
+ARG NO_PROXY
+ARG LINUX_ROOT_PASSWORD
+ARG LINUX_USER_PASSWORD
+
+ENV HTTP_PROXY=${HTTP_PROXY}
+ENV HTTPS_PROXY=${HTTPS_PROXY}
+ENV NO_PROXY=${NO_PROXY}
+ENV LINUX_ROOT_PASSWORD=${LINUX_ROOT_PASSWORD}
+ENV LINUX_USER_PASSWORD=${LINUX_USER_PASSWORD}
+
+RUN echo "root:${LINUX_ROOT_PASSWORD}" | chpasswd \
+&& useradd -u 1000 user \
+&& usermod -aG wheel user \
+&& usermod -aG root user \
+&& echo "user:${LINUX_USER_PASSWORD}" | chpasswd
+
+RUN --mount=type=secret,id=host_certificate_file,dst=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem \
+ dnf -y install cronie langpacks-en glibc-langpack-en sudo openssh-server openssh-clients \
+ && echo 'Defaults visiblepw'              >> /etc/sudoers \
+ && echo 'user ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
+ && echo 'PasswordAuthentication yes ' >> /etc/ssh/sshd_config.d/25-permitrootlogin.conf
+
+# Example:
+# RUN ansible-galaxy collection install amazon.aws --force \
+#  &&  pip3.9 install --upgrade boto3 botocore
+
+# RUN ansible-galaxy collection install azure.azcollection --force \
+#  && pip3.9 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements.txt

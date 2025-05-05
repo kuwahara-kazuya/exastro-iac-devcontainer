@@ -1,0 +1,15 @@
+all:
+  children:
+    hostgroups:
+      hosts:
+        localhost:
+          ansible_host: 127.0.0.1
+          ansible_ssh_extra_args: "local"
+          ansible_python_interpreter: /usr/bin/python3
+          ansible_connection: local
+        target-almalinux:
+          ansible_host: target-almalinux
+          ansible_python_interpreter: /usr/bin/python3
+          ansible_user: user
+          ansible_password: __LINUX_USER_PASSWORD__
+          become: true
