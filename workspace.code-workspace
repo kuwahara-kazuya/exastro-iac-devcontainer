@@ -1,0 +1,30 @@
+{
+	"folders": [
+		{
+			"path": "/ansible-playbooks"
+		},
+		{
+			"path": "ansible-root"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"ansibug.logLevel": "debug",
+		"files.trimFinalNewlines": true,
+		"files.insertFinalNewline": true,
+		"notebook.insertFinalNewline": false,
+		"files.trimTrailingWhitespace": true,
+		"files.associations": {
+			"*.yaml": "ansible",
+			"*.yml": "ansible"
+		}
+	},
+	"extensions": {
+		"recommendations": [
+			"redhat.ansible",
+			"jborean.ansibug"
+		]
+	}
+}

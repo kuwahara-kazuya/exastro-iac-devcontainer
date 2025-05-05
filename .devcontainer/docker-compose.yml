@@ -1,0 +1,48 @@
+services:
+  devcontainer:
+    container_name: ansible-devcontainer
+    hostname: ansible-devcontainer
+    image: my-ansbible-devcontainer
+    user: 1000:${HOST_DOCKER_GID:-1000}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        ITA_VERSION: "${ITA_VERSION:-2.5.4}"
+        http_proxy: "${http_proxy}"
+        https_proxy: "${https_proxy}"
+        HTTP_PROXY: "${HTTP_PROXY}"
+        HTTPS_PROXY: "${HTTPS_PROXY}"
+      secrets:
+        - host_certificate_file
+    tty: true
+    volumes:
+      - ../:/workspace:rw,consistent
+      - ./scripts:/scripts:rw,consistent
+      - ~/.ssh:/home/app_user/.ssh:ro
+      - ~/${GIT_REPO_LOCAL_DIR:-ansible-playbooks}:/ansible-playbooks:rw,consistent
+      - ${HOST_DOCKER_SOCKET_PATH:-/var/run/docker.sock}:/var/run/docker.sock:cached
+      - ${HOST_CERTIFICATE_FILE:-/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem}:${HOST_CERTIFICATE_FILE:-/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem}:ro
+    # ports:
+    #   - "22022:22"
+    environment:
+      - HTTP_PROXY=${HTTP_PROXY}
+      - http_proxy=${HTTP_PROXY}
+      - HTTPS_PROXY=${HTTPS_PROXY}
+      - https_proxy=${HTTPS_PROXY}
+      - NO_PROXY=${NO_PROXY}
+      - no_proxy=${NO_PROXY}
+      - GIT_REPO_URL=${GIT_REPO_URL:-https://github.com/exastro-suite/exastro-iac-samples.git}
+      - GIT_BRANCH=${GIT_BRANCH:-main}
+      - LINUX_ROOT_PASSWORD=${LINUX_ROOT_PASSWORD:-P@ssw0rd}
+      - LINUX_USER_PASSWORD=${LINUX_USER_PASSWORD:-P@ssw0rd}
+      - WIN_ADMIN_PASSWORD=${WIN_ADMIN_PASSWORD:-P@ssw0rd}
+      - ANSIBLE_HOST_KEY_CHECKING=False # ホストキーの自動追加を無効化 (開発環境向け)
+    networks:
+      - ansible-net
+networks:
+  ansible-net:
+
+secrets:
+  host_certificate_file:
+    file: ${HOST_CERTIFICATE_FILE:-/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem}

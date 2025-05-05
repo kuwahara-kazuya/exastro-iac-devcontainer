@@ -1,0 +1,7 @@
+!.gitkeep
+.devcontainer/.env
+.ansible/*
+ansible-root/hosts
+ansible-root/logs/*
+ansible-root/child_playbooks/*
+ansible-root/context/*

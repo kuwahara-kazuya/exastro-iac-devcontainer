@@ -1,0 +1,34 @@
+{
+    "name": "Exastro IaC Editor",
+    "dockerComposeFile": [
+      "docker-compose.yml",
+      "docker-compose.target-almalinux.yml"
+    ],
+    "runArgs": [
+      "--env-file", ".env"
+    ],
+    "service": "devcontainer",
+    "workspaceFolder": "/workspace",
+    "postCreateCommand": "sh /scripts/post_create.sh",
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "redhat.ansible",
+          "ms-python.python",
+          "jborean.ansibug",
+          "ms-azuretools.vscode-docker"
+        ],
+        "settings": {
+          "ansible.ansiblePath": "/usr/bin/ansible",
+          "ansible.python.interpreterPath": "/usr/bin/python3",
+          "ansible.lint.enabled": true,
+          "ansible.lint.config": "/workspace/.ansible-lint.yml",
+          "ansible.lint.runOnSave": true,
+          "ansible.lint.runOnSave.enabled": true,
+          "ansibleLint.linter": "ansible-lint",
+          "ansible.lint.runOnSave.mode": "onType",
+          "http.proxyStrictSSL": false
+        }
+      }
+    }
+  }

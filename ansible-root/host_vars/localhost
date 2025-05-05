@@ -1,0 +1,24 @@
+# This file contains the host variables for localhost.
+
+__loginuser__:
+__inventory_hostname__: localhost
+__dnshostname__: __undefinesymbol__
+__ipaddress__: 127.0.0.1
+__workflowdir__: /workspace/work/out/workflowdir
+__conductor_workflowdir__: /workspace/work/out/conductor_workflowdir
+__conductor_id__: edab17a1-58d9-4573-bb2b-70da212cded6 #this is a sample conductor id
+__execution_no__: 8a935002-6b0f-41d0-a4c0-a9404c0f8b7b #this is a sample execution no
+__movement_id__: 44b07e58-fb64-4e78-9f4e-e93fc64cd36f #this is a sample movement id
+__operation__: "2023/09/18 20:34_85f2660b-d68b-4c3e-b715-7ed76a5e373d: This is a sample operation" #this is a sample operation
+__parameters_dir_for_epc__: /workspace/work/in/_parameter
+__parameter_dir__: /workspace/work/out/_parameters
+__parameters_file_dir_for_epc__: /workspace/work/in/_parameters_file
+__parameters_file_dir__: /workspace/work/out/_parameters_file
+__movement_status_filepath__: /workspace/work/out/MOVEMENT_STATUS_FILE
+
+azure_client_id: <YOUR-AZURE-CLIENT-ID>
+azure_secret:  <YOUR-AZURE-SECRET>
+azure_subscription_id: <YOUR-AZURE-SUBSCRIPTION-ID>
+azure_tenant: <YOUR-AUZRE-TENANT-ID>
+
+ITA_DFLT_Command_String: "uname -n"

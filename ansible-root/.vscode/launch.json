@@ -1,0 +1,23 @@
+{
+    // IntelliSense を使用して利用可能な属性を学べます。
+    // 既存の属性の説明をホバーして表示します。
+    // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "cwd":"${workspaceFolder}",
+            "name": "Ansibug: Launch ansible-playbook Process",
+            "args": [
+                "-vvv",
+                "-i",
+                "hosts",
+                "--vault-password-file",
+                "vault_password_file_path"
+            ],
+            "type": "ansible",
+            "request": "launch",
+            "playbook": "playbook.yml"
+        }
+
+    ]
+}
