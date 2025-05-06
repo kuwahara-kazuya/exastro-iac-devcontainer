@@ -97,10 +97,19 @@ DevContainer の起動に必要なハードウェア要件は下記の通りと�
 
    ![OpenWorkspace](images/open-workspace.png)
 
-   `Shift + P` でコマンドパレットを開き、`reopen in container` と入力し、***開発コンテナー: コンテナーで再度開く* を選択します。
-   ![alt text](images/reopen-in-container.png)
+   `Shift + P` でコマンドパレットを開き、`reopen in container` と入力し、**開発コンテナー: コンテナーで再度開く** を選択します。
+
+   ![Reopen in container](images/reopen-in-container.png)
+
+   下記のメッセージが出る場合は、**続行** ボタンを押下します。
+
+   ![alert message](images/alert-message.png)
 
    10～20分程度で開発コンテナのビルドが完了し、利用可能な状態になります。
+   デバッガがうまく動作しない場合は、`Shift + P` でコマンドパレットを開き、`reload window` と入力し、***開発者: ウィンドウの再読み込み** を選択します。
+
+   ![Reload Window](images/reload-window.png)
+
 
 ## ディレクトリ構成
 
