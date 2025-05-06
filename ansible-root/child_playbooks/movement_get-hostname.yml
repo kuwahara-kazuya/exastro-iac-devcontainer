@@ -1,0 +1,3 @@
+# Purpose: This movement is get the hostname of the target
+---
+- include_tasks: ../ansible-playbooks/exastro-standard/linux/Commands_command.yml
