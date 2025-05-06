@@ -1,0 +1,4 @@
+# Purpose: This movement is used to get the resource group name from Azure.
+---
+- include_tasks: ../ansible-playbooks/sample/azure/get_azure_access_token.yaml
+- include_tasks: ../ansible-playbooks/sample/azure/get_resource_group.yaml
