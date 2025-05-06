@@ -67,6 +67,7 @@ DevContainer の起動に必要なハードウェア要件は下記の通りと�
    サンプルから環境変数ファイルをコピーします。
 
    ```bash
+   cd .devcontainer
    cp -pi .env.sample .env
    ```
 
@@ -96,6 +97,11 @@ DevContainer の起動に必要なハードウェア要件は下記の通りと�
 
    ![OpenWorkspace](images/open-workspace.png)
 
+   `Shift + P` でコマンドパレットを開き、`reopen in container` と入力し、***開発コンテナー: コンテナーで再度開く* を選択します。
+   ![alt text](images/reopen-in-container.png)
+
+   10～20分程度で開発コンテナのビルドが完了し、利用可能な状態になります。
+
 ## ディレクトリ構成
 
 ```
@@ -120,7 +126,7 @@ DevContainer の起動に必要なハードウェア要件は下記の通りと�
 │   ├── _parameters_file                                # ITA 独自変数 __parameters_file_dir_for_epc__ で使用する
 │   │                                                       作業ディレクトリで、収集機能（in）の「_parameters」のパス
 │   ├── playbook.yml                                    # Ansible 実行時のメインのP laybook
-│   ├── template_files                                  # テンプレートファイル格納さき
+│   ├── template_files                                  # テンプレートファイル格納先
 │   ├── upload_files                                    # アップロードファイル格納先
 │   └── vault_password_file_path                        # Ansible Vault パスワードファイル(平文)
 ├── inventory.ini                                        # インベントリファイル
@@ -134,6 +140,17 @@ DevContainer の起動に必要なハードウェア要件は下記の通りと�
 │   └── workflowdir                                     # ITA独自変数 __workflowdir__  のディレクトリ
 └── workspace.code-workspace                             # 本ツールの VSCode ワークスペースの定義
 ```
+
+## Exastro の設定項目とファイルの関係
+
+| Exastro IT Automatoin | Exastro IaC DevContainer |
+| --- | --- |
+| 機器一覧 | ansible-root/hosts |
+| グローバル変数管理 | ansible-root/playbook.yml 内の `environment` |
+| Movement | ansible-root/playbook.yml 内の各プレイ |
+| Playbook 素材 | ansible-root/ansible-playbooks/** |
+| Movement-Playbook紐付 | ansible-root/child_playbooks/**.yml 内の `include_tasks` |
+| 代入値管理 | ansible-root/host_vars/<ターゲットホスト名> |
 
 ## 注意事項
 
