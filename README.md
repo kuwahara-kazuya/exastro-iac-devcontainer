@@ -6,11 +6,18 @@ Exastro IaC DevContainer は、Exastro に搭載する IaC のスムーズな開
 Exastro IaC DevContainer は、リモート開発環境として IaC の実行環境を提供するだけではなく、作業対象となる Linux ホスト(AlmaLinux)も含むオールインワン構成です。
 
 
-## 主な機能
+## 特徴
+
+- Ansible 実行環境とターゲットマシン(コンテナ)をすぐに立ち上げて、すぐに Playbook を実行できます。
+- コンテナベースの環境のため、ターゲットマシンの初期化も簡単にできます。
+- Ansible Lint を組み込んでいるためバグと脆弱性の混入を防ぎ、高い品質の IaC コーディングができます。
+- バグが発生している箇所で処理を止め変数の状態を確認・変更できるので、すぐに問題箇所を特定できます。
 
 ### Ansible playbook の開発に必要なリモートホスト構築や設定を自動的にセットアップ(DevContainer)
 
-![Exastro IaC DevContainer](images/exastro-iac-devcontainer-diagram.svg)
+<a href="https://raw.githubusercontent.com/exastro-suite/exastro-iac-devcontainer/main/images/exastro-iac-devcontainer-diagram.svg">
+<img src="images/exastro-iac-devcontainer-diagram.svg">
+</a>
 
 ### 静的解析機能を利用することで高いコードの品質を維持(Ansible Lint)
 
@@ -55,6 +62,31 @@ DevContainer の起動に必要なハードウェア要件は下記の通りと�
    sh <(curl -sf https://ita.exastro.org/setup) install -i
    ```
 
+1. (オプション) プロキシ環境下の設定
+
+   プロキシ環境下では、Docker エンジンがコンテナイメージを取得する際にプロキシを設定する必要があります。
+
+   ```bash
+   sudo mkdir -p /etc/systemd/system/docker.service.d
+   ```
+
+   ```bash
+   sudo vi /etc/systemd/system/docker.service.d/http-proxy.conf
+   ```
+
+   ```
+   # 環境に合わせて書き換えてください
+   [Service]
+   Environment="HTTP_PROXY=http://proxy.example.com:8080"
+   Environment="HTTPS_PROXY=http://proxy.example.com:8080"
+   Environment="NO_PROXY=localhost,127.0.0.1"
+   ```
+
+   ```bash
+   sudo systemctl daemon-reload
+   sudo systemctl restart docker
+   ```
+
 1. リポジトリをクローン
 
    ```bash
@@ -62,7 +94,7 @@ DevContainer の起動に必要なハードウェア要件は下記の通りと�
    cd exastro-iac-devcontainer
    ```
 
-2. 必要な環境変数を設定:
+1. 必要な環境変数を設定:
 
    サンプルから環境変数ファイルをコピーします。
 
@@ -91,7 +123,8 @@ DevContainer の起動に必要なハードウェア要件は下記の通りと�
    | LINUX_USER_PASSWORD     | Linux マシンの一般ユーザーのパスワード。           | password                                        |
    | WIN_ADMIN_PASSWORD      | Windows マシンの管理者ユーザーのパスワード。      | P@ssw0rd                                       |
 
-3. DevContainer を起動:
+1. DevContainer を起動:
+
    VSCode でこのリポジトリのディレクトリを開き、Remote Containers機能を使用してDevContainerを起動します。
    次に、__ファイル__ > __ファイルでワークスペースを開く...__ から **workspace.code-workspace** を選択し、ワークスペースを開きます。
 
@@ -112,6 +145,8 @@ DevContainer の起動に必要なハードウェア要件は下記の通りと�
 
 
 ## ディレクトリ構成
+
+`ansible-root` は、Exastro IT Automation の Movement 実行時に作成される、InputData の構造に準拠しています。
 
 ```
 /workspace                                                  # 本ツールの root ディレクトリ
