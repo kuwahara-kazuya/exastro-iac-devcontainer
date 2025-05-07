@@ -1,0 +1,41 @@
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    environment:
+      # VERSION: "2025" # Windows Server 2025
+      VERSION: "2022" # Windows Server 2022
+      # VERSION: "2019" # Windows Server 2019
+      # VERSION: "2016" # Windows Server 2016
+      # VERSION: "2012" # Windows Server 2012
+      # VERSION: "11"   # Windows 11 Pro
+      # VERSION: "11e"  # Windows 11 Enterprise
+      # VERSION: "10"   # Windows 10 Pro
+      # VERSION: "10e"  # Windows 10 Enterprise
+      # CPU_CORES: "4"
+      # RAM_SIZE: "8G"
+      # EDITION: "core"
+      USERNAME: "user"
+      PASSWORD: "${WIN_ADMIN_PASSWORD:-P@ssw0rd}"
+      LANGUAGE: "Japanese"
+      REGION: "ja-JP"
+      KEYBOARD: "ja-JP"
+      HTTP_PROXY: ${HTTP_PROXY}
+      http_proxy: ${HTTP_PROXY}
+      HTTPS_PROXY: ${HTTPS_PROXY}
+      https_proxy: ${HTTPS_PROXY}
+      NO_PROXY: ${NO_PROXY}
+      no_proxy: ${NO_PROXY}
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    volumes:
+      - ./data/windows:/storage
+    restart: always
+    stop_grace_period: 2m
