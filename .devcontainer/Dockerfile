@@ -14,9 +14,9 @@ USER 0
 
 RUN --mount=type=secret,id=host_certificate_file,dst=/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem \
  dnf -y install langpacks-en glibc-langpack-en sudo git \
- && sudo dnf -y install dnf-plugins-core \
- && sudo dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo \
- && sudo dnf install docker-ce-cli docker-buildx-plugin docker-compose-plugin \
+ && dnf -y install dnf-plugins-core \
+ && dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo \
+ && dnf install docker-ce-cli docker-buildx-plugin docker-compose-plugin \
  && echo 'Defaults visiblepw'              >> /etc/sudoers \
  && echo 'app_user ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
