@@ -11,8 +11,8 @@ services:
         HTTP_PROXY: "${HTTP_PROXY}"
         HTTPS_PROXY: "${HTTPS_PROXY}"
         NO_PROXY: "${NO_PROXY}"
-        LINUX_ROOT_PASSWORD: "${LINUX_ROOT_PASSWORD}"
-        LINUX_USER_PASSWORD: "${LINUX_USER_PASSWORD}"
+        LINUX_ROOT_PASSWORD: ${LINUX_ROOT_PASSWORD:-P@ssw0rd}
+        LINUX_USER_PASSWORD: ${LINUX_USER_PASSWORD:-password}
       secrets:
         - host_certificate_file
     environment:
