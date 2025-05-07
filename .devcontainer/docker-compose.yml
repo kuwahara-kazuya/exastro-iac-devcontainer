@@ -35,7 +35,7 @@ services:
       - GIT_REPO_URL=${GIT_REPO_URL:-https://github.com/exastro-suite/exastro-iac-samples.git}
       - GIT_BRANCH=${GIT_BRANCH:-main}
       - LINUX_ROOT_PASSWORD=${LINUX_ROOT_PASSWORD:-P@ssw0rd}
-      - LINUX_USER_PASSWORD=${LINUX_USER_PASSWORD:-P@ssw0rd}
+      - LINUX_USER_PASSWORD=${LINUX_USER_PASSWORD:-password}
       - WIN_ADMIN_PASSWORD=${WIN_ADMIN_PASSWORD:-P@ssw0rd}
       - ANSIBLE_HOST_KEY_CHECKING=False # ホストキーの自動追加を無効化 (開発環境向け)
     networks:
