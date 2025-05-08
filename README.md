@@ -220,7 +220,6 @@ grep -c vmx /proc/cpuinfo
 │   ├── template_files                                  # テンプレートファイル格納先
 │   ├── upload_files                                    # アップロードファイル格納先
 │   └── vault_password_file_path                        # Ansible Vault パスワードファイル(平文)
-├── inventory.ini                                        # インベントリファイル
 ├── out                                                  # Ansible 実行時の一時領域
 │   ├── conductor_workflowdir                           # ITA独自変数 __conductor_workflowdir__ のディレクトリ
 │   ├── MOVEMENT_STATUS_FILE                            # ITA独自変数 __movement_status_filepath__ のファイルパス
