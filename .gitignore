@@ -1,5 +1,6 @@
 !.gitkeep
 .devcontainer/.env
+.devcontainer/data/*
 .ansible/*
 ansible-root/hosts
 ansible-root/logs/*

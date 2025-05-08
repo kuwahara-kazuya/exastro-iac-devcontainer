@@ -1,0 +1,3 @@
+# Purpose: This movement ping the target
+---
+- include_tasks: ../ansible-playbooks/exastro-standard/windows/Windows_win_ping.yml

@@ -12,7 +12,15 @@
   gather_facts: true
   # environment:
   tasks:
-    - include_tasks: child_playbooks/movement_get-hostname.yml
+    - include_tasks: child_playbooks/movement_get-hostname-almalinux.yml
+
+- name: Ping the target
+  hosts:
+    - target-windows
+  gather_facts: true
+  # environment:
+  tasks:
+    - include_tasks: child_playbooks/movement_ping-windows.yml
 
 - name: Get Resource Group
   hosts: localhost
