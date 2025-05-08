@@ -13,3 +13,12 @@ all:
           ansible_user: user
           ansible_password: __LINUX_USER_PASSWORD__
           become: true
+        target-windows:
+          ansible_host: target-windows
+          ansible_user: user
+          ansible_password: __WIN_ADMIN_PASSWORD__
+          ansible_winrm_transport: basic
+          ansible_winrm_scheme: http
+          ansible_port: 5985
+          ansible_connection: winrm
+          ansible_winrm_server_cert_validation: ignore

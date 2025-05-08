@@ -1,7 +1,8 @@
 services:
-  windows:
+  target-windows:
+    container_name: target-windows
+    hostname: target-windows
     image: dockurr/windows
-    container_name: windows
     environment:
       # VERSION: "2025" # Windows Server 2025
       VERSION: "2022" # Windows Server 2022
@@ -24,18 +25,24 @@ services:
       http_proxy: ${HTTP_PROXY}
       HTTPS_PROXY: ${HTTPS_PROXY}
       https_proxy: ${HTTPS_PROXY}
-      NO_PROXY: ${NO_PROXY}
-      no_proxy: ${NO_PROXY}
+      NO_PROXY: ${NO_PROXY},target-almalinux,target-windows
+      no_proxy: ${NO_PROXY},target-almalinux,target-windows
     devices:
       - /dev/kvm
       - /dev/net/tun
     cap_add:
       - NET_ADMIN
+    networks:
+      - ansible-net
     ports:
       - 8006:8006
+      - 5985:5985/tcp
+      - 5986:5986/tcp
       - 3389:3389/tcp
       - 3389:3389/udp
     volumes:
+      # - ./data/win2022-eval_ja.iso:/boot.iso
       - ./data/windows:/storage
+      - ./scripts/target-windows:/oem
     restart: always
     stop_grace_period: 2m
