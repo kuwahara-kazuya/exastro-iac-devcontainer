@@ -3,7 +3,7 @@
   "dockerComposeFile": [
     "docker-compose.yml",
     "docker-compose.target-almalinux.yml",
-    "docker-compose.target-windows.yml",
+#    "docker-compose.target-windows.yml",
   ],
   "runArgs": [
     "--env-file", ".env"
